@@ -42,7 +42,7 @@ const Home = () => {
             );
       
             const data = await response.data;
-            setCountries(data);
+            setCountries(await data);
             setLoading(false);
         }catch(error){
             console.log('error-1',error)
@@ -55,12 +55,17 @@ const Home = () => {
   useEffect(() => {
     const fetchStates = async (countryName) => {
         try{
-            const response = await axios.get(
-                `https://crio-location-selector.onrender.com/country=${countryName}/states`
-              );
-              const data = await response.data;
-              setStates(data);
-              setLoading(false);
+            if(isCountrySelected === true){
+                const response = await axios.get(
+                    `https://crio-location-selector.onrender.com/country=${countryName}/states`
+                  );
+                  const data = await response.data;
+                  setStates(await data);
+                  setLoading(false);
+            } else {
+                return;
+            }
+
         }catch(error){
             console.log('error-2',error)
         }
@@ -73,12 +78,17 @@ const Home = () => {
   useEffect(() => {
     const fetchCities = async (countryName, stateName) => {
         try{
-            const response = await axios.get(
-                `https://crio-location-selector.onrender.com/country=${countryName}/state=${stateName}/cities`
-              );
-              const data = await response.data;
-              setCities(data);
-              setLoading(false);
+            if(isStateSelected === true){
+                const response = await axios.get(
+                    `https://crio-location-selector.onrender.com/country=${countryName}/state=${stateName}/cities`
+                  );
+                  const data = await response.data;
+                  setCities(await data);
+                  setLoading(false);
+            } else {
+                return;
+            }
+
         }catch(error){
             console.log('error-3',error)
         }
@@ -87,8 +97,6 @@ const Home = () => {
     };
     fetchCities(countryName, stateName);
   }, [countryName, stateName]);
-
-  console.log("cities", cities);
 
   return (
     <div>
