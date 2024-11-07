@@ -92,22 +92,23 @@ const Home = () => {
 
   return (
     <div>
+    <h1>Select Location</h1>
       <select onChange={(e) => handleCountry(e)}>
-        
+        <option>Select Country</option>
         {countries.map((country, id) => (
           <option key={id}>{country}</option>
         ))}
       </select>
 
       <select disabled={isCountrySelected ? false : true} onChange={(e) => handleState(e)}>
-       
+       <option>Select State</option>
         {states.map((state, id) => (
           <option key={id}>{state}</option>
         ))}
       </select>
 
       <select disabled={isStateSelected ? false : true} onChange={(e) => handleCity(e)}>
-        
+        <option>Select City</option>
         {cities.map((city, id) => (
           <option key={id}>{city}</option>
         ))}
