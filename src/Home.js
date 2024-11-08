@@ -116,7 +116,7 @@ const Home = () => {
         onChange={(e) => handleState(e)}
         value={stateName}
       >
-        <option>Select State</option>
+        
         {states.map((state, id) => (
           <option key={id}>{state}</option>
         ))}
@@ -127,7 +127,7 @@ const Home = () => {
         onChange={(e) => handleCity(e)}
         value={cityName}
       >
-        <option>Select City</option>
+        
         {cities.map((city, id) => (
           <option key={id}>{city}</option>
         ))}
