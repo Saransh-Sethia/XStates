@@ -42,40 +42,35 @@ const Home = () => {
     const fetchCountries = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "https://crio-location-selector.onrender.com/countries"
-        );
-
-        const data = await response.data;
-        setCountries(await data);
-        setLoading(false);
+        const response = await axios.get("https://crio-location-selector.onrender.com/countries");
+        setCountries(response.data);
       } catch (error) {
-        console.log("error-1", error);
+        console.log("Error fetching countries:", error);
+      } finally {
+        setLoading(false);
       }
     };
-
+  
     fetchCountries();
   }, []);
 
+  const fetchStates = async (country) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`https://crio-location-selector.onrender.com/country=${country}/states`);
+      setStates(response.data);
+    } catch (error) {
+      console.log("Error fetching states:", error);
+      setStates([]); // Set to empty array to avoid UI issues
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchStates = async (countryName) => {
-      try {
-        if (isCountrySelected === true) {
-          setLoading(true);
-          const response = await axios.get(
-            `https://crio-location-selector.onrender.com/country=${countryName}/states`
-          );
-          const data = await response.data;
-          setStates(await data);
-          setLoading(false);
-        } else {
-          return;
-        }
-      } catch (error) {
-        console.log("error-2", error);
-      }
-    };
-    fetchStates(countryName);
+    if (countryName) {
+      fetchStates(countryName);
+    }
   }, [countryName]);
 
   useEffect(() => {
