@@ -45,7 +45,7 @@ const Home = () => {
         const response = await axios.get("https://crio-location-selector.onrender.com/countries");
         setCountries(response.data);
       } catch (error) {
-        console.log("Error fetching countries:", error);
+        // console.log("Error fetching countries:", error);
       } finally {
         setLoading(false);
       }
@@ -60,7 +60,7 @@ const Home = () => {
       const response = await axios.get(`https://crio-location-selector.onrender.com/country=${country}/states`);
       setStates(response.data);
     } catch (error) {
-      console.log("Error fetching states:", error);
+      // console.log("Error fetching states:", error);
       setStates([]); // Set to empty array to avoid UI issues
     } finally {
       setLoading(false);
@@ -88,7 +88,7 @@ const Home = () => {
           return;
         }
       } catch (error) {
-        console.log("error-3", error);
+        // console.log("error-3", error);
       }
     };
     fetchCities(countryName, stateName);
